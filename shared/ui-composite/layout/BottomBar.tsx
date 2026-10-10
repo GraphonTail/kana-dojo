@@ -27,6 +27,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import PatchNotesModal from '@/features/PatchNotes/components/PatchNotesModal';
 
 import { APP_VERSION_DISPLAY } from '@/shared/config/constants';
+import { SOURCE_CODE_URL } from '@/shared/config/sourceCode';
 
 const USE_BADGE_STYLE = false;
 
@@ -45,7 +46,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     icon: faGithub,
-    url: 'https://github.com/lingdojo/kana-dojo',
+    url: SOURCE_CODE_URL,
     type: 'fontawesome',
   },
   {

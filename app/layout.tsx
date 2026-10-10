@@ -119,13 +119,16 @@ export const metadata: Metadata = {
 };
 
 // Move analytics condition to a constant to avoid repeated evaluation
+// Fork: analytics and ads are opt-in
+// (ANALYTICS_ENABLED / NEXT_PUBLIC_ADSENSE_ENABLED set to 'true').
 const isAnalyticsEnabled =
   process.env.NODE_ENV === 'production' &&
-  process.env.ANALYTICS_DISABLED !== 'true';
+  process.env.ANALYTICS_ENABLED === 'true';
 
 const isAdSenseEnabled =
   process.env.NODE_ENV === 'production' &&
-  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' &&
+  process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true';
 
 interface RootLayoutProps {
   readonly children: React.ReactNode;

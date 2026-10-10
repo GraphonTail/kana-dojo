@@ -1,15 +1,15 @@
 {
-  "name": "KanaDojo - Learn Japanese Hiragana, Katakana, Kanji, Vocabulary & Translation",
-  "short_name": "KanaDojo",
-  "description": "Master Japanese with KanaDojo - learn Hiragana, Katakana, Kanji, Vocabulary with interactive games. Free Japanese to English translator with romanization. Track progress and customize your experience.",
+  "name": "KanaDojo — японский на русском",
+  "short_name": "KanaDojo RU",
+  "description": "Хирагана, катакана, кандзи и слова JLPT N5–N1 с русскими значениями. Неофициальная русская версия KanaDojo (AGPL-3.0).",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
-  "categories": ["education", "productivity"],
-  "lang": "en",
+  "background_color": "#151d32",
+  "theme_color": "#151d32",
+  "categories": ["education"],
+  "lang": "ru",
   "dir": "ltr",
   "icons": [
     {
@@ -31,20 +31,20 @@
       "sizes": "1920x918",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "KanaDojo desktop view"
+      "label": "KanaDojo на компьютере"
     },
     {
       "src": "/screenshots/narrow-1.png",
       "sizes": "792x832",
       "type": "image/png",
-      "label": "KanaDojo mobile view"
+      "label": "KanaDojo на телефоне"
     }
   ],
   "shortcuts": [
     {
-      "name": "Kana Dojo",
-      "short_name": "Kana",
-      "description": "Practice Hiragana and Katakana",
+      "name": "Кана",
+      "short_name": "Кана",
+      "description": "Хирагана и катакана",
       "url": "/kana",
       "icons": [
         {
@@ -55,9 +55,9 @@
       ]
     },
     {
-      "name": "Kanji Dojo",
-      "short_name": "Kanji",
-      "description": "Practice Kanji characters",
+      "name": "Кандзи",
+      "short_name": "Кандзи",
+      "description": "Кандзи JLPT N5–N1",
       "url": "/kanji",
       "icons": [
         {
@@ -68,23 +68,10 @@
       ]
     },
     {
-      "name": "Vocabulary Dojo",
-      "short_name": "Vocabulary",
-      "description": "Practice Japanese vocabulary",
+      "name": "Слова",
+      "short_name": "Слова",
+      "description": "Слова JLPT N5–N1",
       "url": "/vocabulary",
-      "icons": [
-        {
-          "src": "/icons/icon-96.png",
-          "sizes": "96x96",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "Japanese Translator",
-      "short_name": "Translator",
-      "description": "Translate Japanese to English with romaji",
-      "url": "/translate",
       "icons": [
         {
           "src": "/icons/icon-96.png",

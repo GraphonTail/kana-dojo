@@ -23,6 +23,7 @@ import { useClick } from '@/shared/hooks/generic/useAudio';
 import { useThemePreferences } from '@/features/Preferences';
 import useDecorationsStore from '@/shared/store/useDecorationsStore';
 import { useMediaQuery } from 'react-responsive';
+import { SOURCE_CODE_URL } from '@/shared/config/sourceCode';
 
 const Decorations = lazy(() => import('@/shared/ui-composite/Decorations/Decorations'));
 
@@ -231,7 +232,7 @@ const MainMenu = () => {
               )}
               onClick={() => {
                 playClick();
-                window.open('https://github.com/lingdojo/kana-dojo', '_blank');
+                window.open(SOURCE_CODE_URL, '_blank');
               }}
             />
             <button

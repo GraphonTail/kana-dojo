@@ -17,7 +17,8 @@ interface AdSenseDisplayProps {
 
 const isAdSenseEnabled =
   process.env.NODE_ENV === 'production' &&
-  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' &&
+  process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true';
 
 export default function AdSenseDisplay({
   slot,
