@@ -1,7 +1,5 @@
 import type { IKanjiObj, KanjiLevel } from '@/entities/kanji';
-import {
-  useKanjiCacheStore,
-} from '@/features/Kanji/store/useKanjiCacheStore';
+import { useKanjiCacheStore } from '@/features/Kanji/store/useKanjiCacheStore';
 
 type RawKanjiEntry = {
   id: number;
@@ -9,6 +7,23 @@ type RawKanjiEntry = {
   onyomi: string[];
   kunyomi: string[];
   meanings: string[];
+};
+
+// Russian fork: /data-kanji-ru/<LEVEL>.json maps kanji -> "значение; значение"
+// (built from data/ru/kanji-<level>.tsv). Russian meanings go first, English stays after them.
+type RuMeanings = Record<string, string>;
+const ruRequests: Partial<Record<KanjiLevel, Promise<RuMeanings>>> = {};
+const loadRuMeanings = (level: KanjiLevel): Promise<RuMeanings> =>
+  (ruRequests[level] ??= fetch(`/data-kanji-ru/${level.toUpperCase()}.json`)
+    .then(res => (res.ok ? (res.json() as Promise<RuMeanings>) : {}))
+    .catch(() => ({})));
+
+const withRuMeanings = (entry: RawKanjiEntry, ru?: string): RawKanjiEntry => {
+  const ruPieces = (ru ?? '')
+    .split(';')
+    .map(piece => piece.trim())
+    .filter(Boolean);
+  return { ...entry, meanings: [...ruPieces, ...entry.meanings] };
 };
 
 // Module-level cache - persists across component mounts
@@ -42,10 +57,16 @@ export const kanjiDataService = {
     }
 
     // Create new request and store the promise to prevent duplicate fetches
-    pendingRequests[level] = fetch(`/data-kanji/${level.toUpperCase()}.json`)
-      .then(res => res.json() as Promise<RawKanjiEntry[]>)
-      .then(data => {
-        const kanji = data.map(entry => ({ ...entry })) as IKanjiObj[];
+    pendingRequests[level] = Promise.all([
+      fetch(`/data-kanji/${level.toUpperCase()}.json`).then(
+        res => res.json() as Promise<RawKanjiEntry[]>,
+      ),
+      loadRuMeanings(level),
+    ])
+      .then(([data, ru]) => {
+        const kanji = data.map(entry =>
+          withRuMeanings(entry, ru[entry.kanjiChar]),
+        ) as IKanjiObj[];
         setCachedLevel(level, kanji);
         delete pendingRequests[level];
         return kanji;

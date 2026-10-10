@@ -1,3 +1,15 @@
+const CYRILLIC = /[А-Яа-яЁё]/;
+
+/**
+ * Russian fork: meanings hold the Russian translations first and the original
+ * English ones after them (so English answers are still accepted). Lists shown
+ * to the learner keep only the Russian part when there is one.
+ */
+export function displayMeanings(meanings: string[]): string[] {
+  const russian = meanings.filter(meaning => CYRILLIC.test(meaning));
+  return russian.length > 0 ? russian : meanings;
+}
+
 export function removeVerbDuplicates(meanings: string[]): string[] {
   const set = new Set(meanings);
   return meanings.filter(m => {
@@ -11,7 +23,12 @@ export function removeVerbDuplicates(meanings: string[]): string[] {
  * and as the starting point for meaning answers.
  */
 export const normalizeAnswerValue = (value: string): string =>
-  value.trim().normalize('NFC').toLowerCase();
+  value
+    .trim()
+    .normalize('NFC')
+    .toLowerCase()
+    // Russian fork: "ё" and "е" are interchangeable when typing answers
+    .replace(/ё/g, 'е');
 
 /**
  * A lone English infinitive marker or article is optional. Compound prefixes

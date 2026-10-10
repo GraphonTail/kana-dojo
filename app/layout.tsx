@@ -13,6 +13,7 @@ import { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
 import Script from 'next/script';
 import SessionPrefetch from '@/shared/ui-composite/Performance/SessionPrefetch';
+import RuOverlay from '@/core/i18n/ru-overlay/RuOverlay';
 
 const googleVerificationToken = process.env.GOOGLE_VERIFICATION_TOKEN || '';
 const msVerificationToken = process.env.MS_VERIFICATION_TOKEN || '';
@@ -137,7 +138,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   const locale = headersList.get('x-locale') || 'en';
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    // Fork: the English interface is shown in Russian (core/i18n/ru-overlay)
+    <html lang={locale === 'en' ? 'ru' : locale} suppressHydrationWarning>
       <head>
         <StructuredData data={kanaDojoSchema} />
         {/* DNS prefetch for external domains - resolve DNS early */}
@@ -184,6 +186,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       </head>
       <body>
         <SessionPrefetch />
+        <RuOverlay />
         {isAnalyticsEnabled && (
           <>
             <GoogleAnalytics />
@@ -197,4 +200,3 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     </html>
   );
 }
-
