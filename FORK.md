@@ -18,7 +18,7 @@ _English: this is an unofficial Russian-language fork of [lingdojo/kana-dojo](ht
 - удалены `public/ads.txt` и музыкальный файл `mariah-carey.opus`;
 - кнопки GitHub ведут на исходный код именно этой сборки (`shared/config/sourceCode.ts`), как требует раздел 13 AGPL.
 
-**Android.** `public/.well-known/assetlinks.json` связывает сайт с Android-приложением `ua.kanadojo.ru` (Trusted Web Activity). Приложение открывает этот сайт в Chrome на весь экран и работает только онлайн.
+**Android.** `public/.well-known/assetlinks.json` связывает сайт с Android-приложением `ua.kanadojo.ru` (Trusted Web Activity). Приложение открывает сайт https://kanadojo-ru.vercel.app в Chrome на весь экран и работает только онлайн. Настройки сборки лежат в `scripts/ru/android/` (`twa-manifest.json` и `build-apk.sh`). Ключ подписи `kanadojo-ru.keystore` в Git не хранится: новые версии приложения нужно подписывать тем же ключом.
 
 ## Обновление из оригинала
 
