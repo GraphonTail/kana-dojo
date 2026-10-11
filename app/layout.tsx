@@ -13,6 +13,7 @@ import { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
 import Script from 'next/script';
 import SessionPrefetch from '@/shared/ui-composite/Performance/SessionPrefetch';
+import RuOverlay from '@/core/i18n/ru-overlay/RuOverlay';
 
 const googleVerificationToken = process.env.GOOGLE_VERIFICATION_TOKEN || '';
 const msVerificationToken = process.env.MS_VERIFICATION_TOKEN || '';
@@ -118,13 +119,16 @@ export const metadata: Metadata = {
 };
 
 // Move analytics condition to a constant to avoid repeated evaluation
+// Fork: analytics and ads are opt-in
+// (ANALYTICS_ENABLED / NEXT_PUBLIC_ADSENSE_ENABLED set to 'true').
 const isAnalyticsEnabled =
   process.env.NODE_ENV === 'production' &&
-  process.env.ANALYTICS_DISABLED !== 'true';
+  process.env.ANALYTICS_ENABLED === 'true';
 
 const isAdSenseEnabled =
   process.env.NODE_ENV === 'production' &&
-  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' &&
+  process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true';
 
 interface RootLayoutProps {
   readonly children: React.ReactNode;
@@ -137,7 +141,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   const locale = headersList.get('x-locale') || 'en';
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    // Fork: the English interface is shown in Russian (core/i18n/ru-overlay)
+    <html lang={locale === 'en' ? 'ru' : locale} suppressHydrationWarning>
       <head>
         <StructuredData data={kanaDojoSchema} />
         {/* DNS prefetch for external domains - resolve DNS early */}
@@ -184,6 +189,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       </head>
       <body>
         <SessionPrefetch />
+        <RuOverlay />
         {isAnalyticsEnabled && (
           <>
             <GoogleAnalytics />
@@ -197,4 +203,3 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     </html>
   );
 }
-

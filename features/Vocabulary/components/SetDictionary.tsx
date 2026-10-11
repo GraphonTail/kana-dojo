@@ -3,8 +3,11 @@
 import clsx from 'clsx';
 import { toKana, toRomaji } from 'wanakana';
 import { IWord } from '@/shared/types/interfaces';
-import { cardBorderStyles } from '@/shared/utils/styles';
-import { useAudioPreferences, useThemePreferences } from '@/features/Preferences';
+import { displayMeanings } from '@/shared/utils/meanings';
+import {
+  useAudioPreferences,
+  useThemePreferences,
+} from '@/features/Preferences';
 import { useJapaneseTTS } from '@/features/Preferences/hooks/useJapaneseTTS';
 import FuriganaText from '@/shared/ui-composite/text/FuriganaText';
 import { Volume2 } from 'lucide-react';
@@ -133,7 +136,7 @@ const SetDictionary = memo(function SetDictionary({
                 </span>
               </button>
               <p className='text-xl text-(--secondary-color) md:text-2xl'>
-                {wordObj.meanings.join(', ')}
+                {displayMeanings(wordObj.meanings).join(', ')}
               </p>
             </div>
           </div>
@@ -144,4 +147,3 @@ const SetDictionary = memo(function SetDictionary({
 });
 
 export default SetDictionary;
-

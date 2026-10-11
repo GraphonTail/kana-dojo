@@ -3,11 +3,20 @@ import { toKana, toRomaji } from 'wanakana';
 import type { IKanjiObj } from '@/features/Kanji';
 import type { IVocabObj } from '@/features/Vocabulary';
 import { CircleArrowRight, Volume2 } from 'lucide-react';
-import { Dispatch, SetStateAction, useRef, useEffect, useCallback } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useRef,
+  useEffect,
+  useCallback,
+} from 'react';
 import { useClick } from '@/shared/hooks/generic/useAudio';
-import { removeVerbDuplicates } from '@/shared/utils/meanings';
+import { displayMeanings, removeVerbDuplicates } from '@/shared/utils/meanings';
 import FuriganaText from '@/shared/ui-composite/text/FuriganaText';
-import { useAudioPreferences, useThemePreferences } from '@/features/Preferences';
+import {
+  useAudioPreferences,
+  useThemePreferences,
+} from '@/features/Preferences';
 import { useJapaneseTTS } from '@/features/Preferences/hooks/useJapaneseTTS';
 import { ActionButton } from '@/shared/ui/components/ActionButton';
 import { motion } from 'framer-motion';
@@ -168,7 +177,7 @@ const ContinueButton = ({
 const KanjiDisplay = ({ payload }: { payload: IKanjiObj }) => (
   <motion.div
     variants={mainCharVariants}
-    className='relative flex aspect-square w-full max-w-[100px] sm:max-w-[125px] items-center justify-center'
+    className='relative flex aspect-square w-full max-w-[100px] items-center justify-center sm:max-w-[125px]'
     style={{ perspective: 1000 }}
   >
     <a
@@ -320,7 +329,7 @@ const KanjiSummary = ({
       variants={meaningVariants}
       className='w-full text-2xl text-(--secondary-color) md:text-3xl'
     >
-      {payload.meanings.join(', ')}
+      {displayMeanings(payload.meanings).join(', ')}
     </motion.p>
 
     {!isEmbedded && (
@@ -363,7 +372,7 @@ const VocabSummary = ({
       initial='hidden'
       animate='visible'
       className={cn(
-        'flex w-full flex-col items-center justify-start gap-4 sm:gap-6 py-4 md:w-3/4 lg:w-1/2',
+        'flex w-full flex-col items-center justify-start gap-4 py-4 sm:gap-6 md:w-3/4 lg:w-1/2',
         isGlassMode && 'rounded-xl bg-(--card-color) px-4 py-2',
       )}
     >
@@ -421,7 +430,7 @@ const VocabSummary = ({
           variants={meaningVariants}
           className='text-2xl text-(--secondary-color) md:text-3xl'
         >
-          {removeVerbDuplicates(payload.meanings).join(', ')}
+          {removeVerbDuplicates(displayMeanings(payload.meanings)).join(', ')}
         </motion.p>
       </motion.div>
 
@@ -535,4 +544,3 @@ const AnswerSummary = ({
 };
 
 export default AnswerSummary;
-

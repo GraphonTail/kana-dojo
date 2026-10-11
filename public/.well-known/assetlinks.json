@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ua.kanadojo.ru",
+      "sha256_cert_fingerprints": [
+        "13:ED:3F:71:5E:43:89:09:38:64:46:4A:B5:1E:3C:D8:18:4F:AC:8B:65:5A:92:33:61:84:FF:F3:D0:A1:7F:F9"
+      ]
+    }
+  }
+]

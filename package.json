@@ -12,6 +12,7 @@
     "test:watch": "vitest",
     "postbuild": "next-sitemap",
     "start": "next start",
+    "ru:build": "node scripts/ru/build-ru-data.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

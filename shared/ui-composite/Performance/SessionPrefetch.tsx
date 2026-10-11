@@ -8,6 +8,8 @@ const PREFETCH_URLS = [
   '/data-kanji/decorations.json',
   '/data-kanji/N5.json',
   '/data-vocab/n5.json',
+  '/data-kanji-ru/N5.json',
+  '/data-vocab-ru/n5.json',
   '/api/facts',
 ];
 

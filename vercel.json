@@ -15,12 +15,6 @@
       "maxDuration": 10
     }
   },
-  "crons": [
-    {
-      "path": "/api/process-bug-reports",
-      "schedule": "*/20 * * * *"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -36,6 +30,10 @@
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
         }
       ]
     },
