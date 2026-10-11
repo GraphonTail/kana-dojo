@@ -20,6 +20,8 @@ _English: this is an unofficial Russian-language fork of [lingdojo/kana-dojo](ht
 
 **Android.** `public/.well-known/assetlinks.json` связывает сайт с Android-приложением `ua.kanadojo.ru` (Trusted Web Activity). Приложение открывает сайт https://kanadojo-ru.vercel.app в Chrome на весь экран и работает только онлайн. Настройки сборки лежат в `scripts/ru/android/` (`twa-manifest.json` и `build-apk.sh`). Ключ подписи `kanadojo-ru.keystore` в Git не хранится: новые версии приложения нужно подписывать тем же ключом.
 
+**Автономное Android-приложение (без интернета).** `scripts/ru/standalone/` собирает версию 2.x того же приложения `ua.kanadojo.ru`, которой сайт не нужен. `build-web.mjs` копирует репозиторий во временную папку и оставляет там только учебные экраны. Затем он собирает статическую копию сайта (Next.js `output: 'export'`) и кладёт её в `android/app/src/main/assets/www`. Android-оболочка (`android/`) показывает эти файлы в WebView. Произношение идёт через системный синтез речи Android (`bridge.js` и `TtsBridge.java`), ссылки на другие сайты открываются в браузере, резервная копия прогресса сохраняется через системный диалог. Собрать: `scripts/ru/standalone/build-apk.sh` (нужны JDK 17, Android SDK и ключ подписи). Перед каждым выпуском нужно поднять `versionCode` в `android/app/build.gradle`.
+
 ## Обновление из оригинала
 
 ```bash

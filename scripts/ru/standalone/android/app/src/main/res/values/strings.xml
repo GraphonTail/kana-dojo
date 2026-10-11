@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KanaDojo — японский на русском</string>
+    <string name="launcher_name">KanaDojo RU</string>
+    <string name="tts_missing">Для произношения установите японский голос: Настройки → Синтез речи.</string>
+    <string name="no_browser">Не найдено приложение, чтобы открыть ссылку.</string>
+    <string name="file_saved">Файл сохранён.</string>
+    <string name="file_not_saved">Не удалось сохранить файл.</string>
+</resources>

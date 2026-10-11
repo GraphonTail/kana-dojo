@@ -1,0 +1,17 @@
+pluginManagement {
+    repositories {
+        google()
+        // Same content as mavenCentral(); this mirror host is less likely to rate-limit.
+        maven { url 'https://repo1.maven.org/maven2/' }
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        maven { url 'https://repo1.maven.org/maven2/' }
+    }
+}
+rootProject.name = 'KanaDojoRU'
+include ':app'
